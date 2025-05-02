@@ -157,6 +157,38 @@ export default function CotacaoAvla() {
         {loading ? 'Consultando...' : 'Enviar Cotação'}
       </button>
 
+      {resultado?.id_proposal && (
+  <button
+    onClick={async () => {
+      try {
+        const emitirRes = await axios.post('/api/emitir', {
+          id_proposta: resultado.id_proposal,
+          documento_emitente: form.cnpjTomador, // ou um valor fixo, como "41182665000140"
+        })
+
+        alert('✅ Apólice emitida com sucesso!\nID Apólice: ' + emitirRes.data.id_apolice)
+      } catch (err: any) {
+        alert(
+          '❌ Erro ao emitir apólice:\n' +
+            (err.response?.data?.error || err.message)
+        )
+      }
+    }}
+    style={{
+      marginTop: 10,
+      padding: '10px 20px',
+      background: '#28a745',
+      color: '#fff',
+      border: 'none',
+      borderRadius: 4,
+      cursor: 'pointer',
+    }}
+  >
+    Emitir Apólice
+  </button>
+)}
+
+
       {erro && (
         <div style={{ color: 'red', marginTop: 30 }}>
           <strong>❌ Erro:</strong> {erro}
