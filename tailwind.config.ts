@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-orbitron-sans)']  
+        sans: ['var(--font-roboto)', 'sans-serif'],  
       },
 
       colors: {
